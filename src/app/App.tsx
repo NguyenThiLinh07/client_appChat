@@ -60,7 +60,7 @@ export function App() {
     <ConfigProviderCustom
       theme={{
         token: {
-          colorPrimary: '#ff4218',
+          colorPrimary: '#6318ff',
           padding: 8,
         },
       }}

@@ -1,124 +1,97 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { translations } from '../../../locales/translations';
-import { useDispatch } from 'react-redux';
 import { InputCommon } from '../../common/InputCommon/InputCommon';
-import { TableCommon } from '../../common/TableCommon/TableCommon';
+import useService from './services';
+import './style.scss';
+import { Button, Checkbox, Form } from 'antd';
+import { Link } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
+import { firebaseAuth } from '../../../services/firebase';
+import { REGEX } from '../../../utils/contants/regex';
+import { MESSAGES_ERROR } from '../../../utils/contants/messagesError';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { MdEmail } from 'react-icons/md';
 
 const Login: React.FC = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const { t } = useService();
 
-  const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-  ];
+  const handleLogin = (values: any) => {
+    console.log('values', values);
+  };
 
-  const dataSource = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-  ];
+  const handleLoginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const {
+      user: { displayName: name, email, photoURL: avatar },
+    } = await signInWithPopup(firebaseAuth, provider);
+    console.log();
+  };
 
   return (
-    <div>
-      <p>{t(translations.LOGIN)}</p>
-      <InputCommon label="hello" type="number" placeholder="Number nha" />
-      <TableCommon dataSource={dataSource} columns={columns} />
+    <div className="login">
+      <h1 className="text-4xl font-bold text-primary">{t(translations.LOGIN)}</h1>
+      <Form onFinish={handleLogin} className="p-6" initialValues={{ remember: true }}>
+        <Form.Item
+          required={true}
+          name="email"
+          rules={[
+            {
+              required: true,
+              pattern: new RegExp(REGEX.EMAIL),
+              message: MESSAGES_ERROR.EMAIL,
+            },
+          ]}
+        >
+          <InputCommon label="Email" placeholder="Enter email" id="email" prefix={<MdEmail />} />
+        </Form.Item>
+        <Form.Item
+          required={true}
+          name="passwrod"
+          rules={[
+            {
+              required: true,
+              message: MESSAGES_ERROR.REQUIRED,
+            },
+            () => ({
+              validator(_, value) {
+                if (!value || REGEX.PASSWORD.test(value)) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error(MESSAGES_ERROR.PASSWORD));
+              },
+            }),
+          ]}
+        >
+          <InputCommon
+            label="Password"
+            placeholder="Enter password"
+            id="password"
+            type="password"
+            prefix={<RiLockPasswordFill />}
+          />
+        </Form.Item>
+        <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 4, span: 16 }}>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+        <div className="flex justify-center gap-2 pb-4">
+          <Button
+            className="flex gap-1 items-center"
+            htmlType="button"
+            onClick={handleLoginWithGoogle}
+          >
+            <FcGoogle className="text-xl" /> <p>Login with Google</p>
+          </Button>
+          <Link to={'/register'} className="my-auto italic underline text-primary opacity-70">
+            Register now!
+          </Link>
+        </div>
+        <Form.Item className="btn-login">
+          <Button type="primary" htmlType="submit">
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };

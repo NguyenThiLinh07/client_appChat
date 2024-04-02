@@ -50,7 +50,7 @@ const RenderRoutes = ({
               element={
                 <LayoutRoute>
                   {route.routes ? (
-                    <RenderRoutes routes={route.routes} isAuthenticated={true} />
+                    <RenderRoutes routes={route.routes} isAuthenticated={isAuthenticated} />
                   ) : (
                     <Component history={{}} location={{}} match={{}} />
                   )}
