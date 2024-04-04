@@ -11,21 +11,26 @@ import { firebaseAuth } from '../../../services/firebase';
 import { REGEX } from '../../../utils/contants/regex';
 import { MESSAGES_ERROR } from '../../../utils/contants/messagesError';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { MdEmail } from 'react-icons/md';
+import { FaUser } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../store/auth/authSlice';
+import { TUser } from '../../../types/user/user';
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
   const { t } = useService();
 
   const handleLogin = (values: any) => {
-    console.log('values', values);
+    const { remember, ...data } = values;
+    console.log('data', data);
+    // @ts-ignore
+    dispatch(login(data as TUser));
   };
 
   const handleLoginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    const {
-      user: { displayName: name, email, photoURL: avatar },
-    } = await signInWithPopup(firebaseAuth, provider);
-    console.log();
+    const { user } = await signInWithPopup(firebaseAuth, provider);
+    console.log('user', user);
   };
 
   return (
@@ -34,16 +39,28 @@ const Login: React.FC = () => {
       <Form onFinish={handleLogin} className="p-6" initialValues={{ remember: true }}>
         <Form.Item
           required={true}
-          name="email"
+          name="username"
           rules={[
             {
               required: true,
-              pattern: new RegExp(REGEX.EMAIL),
-              message: MESSAGES_ERROR.EMAIL,
+              message: MESSAGES_ERROR.REQUIRED,
             },
+            () => ({
+              validator(_, value) {
+                if (!value || value.toString().trim().length >= 8) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error(MESSAGES_ERROR.USERNAME));
+              },
+            }),
           ]}
         >
-          <InputCommon label="Email" placeholder="Enter email" id="email" prefix={<MdEmail />} />
+          <InputCommon
+            label="Username"
+            placeholder="Enter username"
+            id="username"
+            prefix={<FaUser />}
+          />
         </Form.Item>
         <Form.Item
           required={true}
@@ -88,7 +105,7 @@ const Login: React.FC = () => {
         </div>
         <Form.Item className="btn-login">
           <Button type="primary" htmlType="submit">
-            Login
+            {t(translations.LOGIN)}
           </Button>
         </Form.Item>
       </Form>

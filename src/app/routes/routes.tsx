@@ -70,22 +70,17 @@ export const routes = [
     component: lazy(() => import('../pages/Login/Login')),
   },
   {
-    path: EPath.login,
+    path: EPath.register,
     component: lazy(() => import('../pages/Register/Register')),
   },
   {
     path: '*',
     layout: LayoutPage,
-    component: () => <Navigate to={EPath.login} />,
+    component: () => <Navigate to={EPath.home} />,
     routes: [
       {
         path: '/',
-        component: lazy(() => import('../pages/Login/Login')),
-        auth: true,
-      },
-      {
-        path: 'a',
-        component: lazy(() => import('../pages/Login/Login')),
+        component: lazy(() => import('../pages/Chat/Chat')),
         auth: true,
       },
     ],
