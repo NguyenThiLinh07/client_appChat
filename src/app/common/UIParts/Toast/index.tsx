@@ -3,6 +3,8 @@ import { toast, ToastContainer, ToastOptions, Zoom } from 'react-toastify';
 import { ETypeToast } from '../../../enum';
 import { useService } from './services';
 import 'react-toastify/dist/ReactToastify.css';
+import './style.scss';
+
 const Toast: React.FC = () => {
   const { label, isShow, hide, type } = useService();
 

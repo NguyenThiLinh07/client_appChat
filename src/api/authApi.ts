@@ -1,23 +1,23 @@
-import {
-  TRegister,
-  TRequestLogin,
-  TRequestLogout,
-  TRequestResetPassword,
-} from '../types/user/user';
-import { axiosClient } from './axiosClient';
+import { TRegister, TRequestLogout, TRequestResetPassword, TUser } from '../types/user/user';
+import axiosInstance from './axiosClient';
 
 export const authApi = {
   register: (data: TRegister) => {
     const url = '/auth/register';
-    return axiosClient.post(url, data);
+    return axiosInstance.post(url, data);
   },
-  login: (data: TRequestLogin) => {
+  login: (data: TUser) => {
     const url = '/auth/login';
-    return axiosClient.post(url, data);
+    console.log('data1', data);
+    return axiosInstance.post(url, data);
+  },
+  loginWithGoogle: (token: string) => {
+    const url = `/auth/login-google?tokenId=${token}`;
+    return axiosInstance.get(url);
   },
   logout: (data: TRequestLogout) => {
     const url = '/auth/logout';
-    return axiosClient.post(url, data);
+    return axiosInstance.post(url, data);
   },
   resetPassword: (data: TRequestResetPassword) => {},
 };

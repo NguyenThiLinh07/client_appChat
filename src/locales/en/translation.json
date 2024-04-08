@@ -11,7 +11,8 @@
     "EMAIL": "Email",
     "PASSWORD": "Password",
     "CONFIRM_PASSWORD": "Confirm password",
-    "ADDRESS": "Address"
+    "ADDRESS": "Address",
+    "BIRTHDAY": "Birthday"
   },
   "LOGIN": "Login"
 }

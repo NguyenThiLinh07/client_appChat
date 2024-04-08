@@ -1,14 +1,14 @@
 export type TUser = {
-  name: string;
-  email: string;
-  password: string;
-  avatar: string;
-  address: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  avatar?: string;
+  address?: string;
+  birthDay?: string;
+  phoneNumber?: string;
 };
 
-export type TRegister = Omit<TUser, 'avatar' | 'address'>;
-
-export type TRequestLogin = Omit<TUser, 'name' | 'avatar' | 'address'>;
+export type TRegister = Omit<TUser, 'avatar'>;
 
 export type TRequestLogout = {
   refreshToken: string;
