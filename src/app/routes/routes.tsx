@@ -83,6 +83,11 @@ export const routes = [
         component: lazy(() => import('../pages/Chat/Chat')),
         auth: true,
       },
+      {
+        path: EPath.home,
+        component: lazy(() => import('../pages/Chat/Chat')),
+        auth: true,
+      },
     ],
   },
 ];

@@ -2,13 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './app/App';
 import reportWebVitals from './reportWebVitals';
-import { configureAppStore } from './store/configureStore';
+import store from './store/configureStore';
 import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-
-const store = configureAppStore();
 
 root.render(
   <Provider store={store}>

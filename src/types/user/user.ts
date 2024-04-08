@@ -8,7 +8,7 @@ export type TUser = {
   phoneNumber?: string;
 };
 
-export type TRegister = Omit<TUser, 'avatar' | 'address'>;
+export type TRegister = Omit<TUser, 'avatar'>;
 
 export type TRequestLogout = {
   refreshToken: string;
