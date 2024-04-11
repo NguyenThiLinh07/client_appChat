@@ -3,7 +3,8 @@
   "CREATE": "Create",
   "DELETE": "Delete",
   "EDIT": "Edit",
-  "SAVE": "Save"
+  "SAVE": "Save",
+  "PROFILE": "Profile"
  },
  "REGISTER": {
   "REGISTER": "Register",

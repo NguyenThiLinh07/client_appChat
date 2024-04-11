@@ -15,8 +15,13 @@ const LayoutPage: React.FC<Props> = (props: Props) => {
   return (
     <Layout>
       <Header />
-      <Layout>
-        <Sider width={198} breakpoint="xl" collapsedWidth="0" className="bg-transperent">
+      <Layout className="h-[calc(100vh-60px)]">
+        <Sider
+          width={300}
+          breakpoint="xl"
+          collapsedWidth="0"
+          className="bg-transperent shadow-default"
+        >
           <SideBar />
         </Sider>
         <Layout style={{ background: '#fffbf8' }}>

@@ -88,6 +88,11 @@ export const routes = [
         component: lazy(() => import('../pages/Chat/Chat')),
         auth: true,
       },
+      {
+        path: EPath.profile,
+        component: lazy(() => import('../pages/Profile/Profile')),
+        auth: true,
+      },
     ],
   },
 ];
