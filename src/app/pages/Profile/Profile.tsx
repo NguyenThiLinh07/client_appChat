@@ -1,6 +1,4 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../types';
-import { Avatar, Button, Form, Spin } from 'antd';
+import { Button, Form, Spin } from 'antd';
 import { MESSAGES_ERROR } from '../../../utils/contants/messagesError';
 import { InputCommon } from '../../common/InputCommon/InputCommon';
 import { FaUser } from 'react-icons/fa';
@@ -9,21 +7,22 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { translations } from '../../../locales/translations';
 import React from 'react';
 import useServices from './services';
-import { MdEmail } from 'react-icons/md';
+import { MdEmail, MdLocalPhone } from 'react-icons/md';
+import { LiaBirthdayCakeSolid } from 'react-icons/lia';
+import Avatar from '../../common/Avatar/Avatar';
 
 const Profile = () => {
-  const { currentUser, loading } = useSelector((state: RootState) => state.auth);
-  const { t } = useServices();
-  const handleUpdateProfile = (values: any) => {
-    console.log('values', values);
-  };
+  const { t, loading, image, setImage, handleUpdateProfile } = useServices();
 
   return (
     <Spin spinning={loading}>
-      <div className="w-[800px] mt-[100px] mx-auto p-6 text-center rounded-[10px]">
-        <h1 className="text-4xl font-bold text-primary">Profile</h1>
+      <h1 className="text-4xl font-bold text-primary">Profile</h1>
+
+      <div className="w-[800px]  mx-auto p-6 text-center rounded-[10px]">
         <Form onFinish={handleUpdateProfile} className="p-6" initialValues={{ remember: true }}>
-          <Avatar size={120} src={currentUser?.avatar} className="cursor-pointer" />
+          <div>
+            <Avatar type="xl" image={image} setImage={setImage} />
+          </div>
           <Form.Item
             required={true}
             name="username"
@@ -87,6 +86,32 @@ const Profile = () => {
             ]}
           >
             <InputCommon label="Email" placeholder="Enter email" id="email" prefix={<MdEmail />} />
+          </Form.Item>
+          <Form.Item name="birthDay">
+            <InputCommon
+              label={t(translations.REGISTER.BIRTHDAY)}
+              placeholder="Birth day"
+              id="birthDay"
+              type="date"
+              prefix={<LiaBirthdayCakeSolid />}
+            />
+          </Form.Item>
+          <Form.Item name="address">
+            <InputCommon
+              label={t(translations.REGISTER.ADDRESS)}
+              placeholder="Address"
+              id="address"
+              type="text"
+            />
+          </Form.Item>
+          <Form.Item name="phoneNumber">
+            <InputCommon
+              label="Phone Number"
+              placeholder="Phone Number"
+              id="phoneNumber"
+              type="text"
+              prefix={<MdLocalPhone />}
+            />
           </Form.Item>
 
           <Form.Item className="btn-login">
