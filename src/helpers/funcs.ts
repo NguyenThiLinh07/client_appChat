@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+
 export const clearAllData = () => {
     // Clear cache and reload
     window.location.reload();
@@ -12,3 +13,14 @@ export const clearAllData = () => {
         Cookies.remove(cookie);
     });
 };
+
+export const debounce = (callback: Function, delay: number) => {
+    let timeout: any;
+    return (...args: any) => {
+        console.log('...args:', args);
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            callback(...args);
+        }, delay);
+    };
+}

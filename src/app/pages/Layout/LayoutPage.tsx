@@ -24,8 +24,8 @@ const LayoutPage: React.FC<Props> = (props: Props) => {
         >
           <SideBar />
         </Sider>
-        <Layout style={{ background: '#fffbf8' }}>
-          <Content style={{ margin: '24px 16px 0' }}>{children}</Content>
+        <Layout className="bg-primary">
+          <Content>{children}</Content>
         </Layout>
       </Layout>
     </Layout>

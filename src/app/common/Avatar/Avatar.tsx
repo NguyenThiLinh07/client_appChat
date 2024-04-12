@@ -7,15 +7,17 @@ import CapturePhoto from '../CapturePhoto/CapturePhoto';
 import PhotoPicker from '../PhotoPicker/PhotoPicker';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../types';
+import './style.scss';
 
 type Props = {
   type: 'sm' | 'md' | 'lg' | 'xl';
   image: string;
   setImage?: React.Dispatch<React.SetStateAction<string>>;
+  isPreview?: boolean;
 };
 
 const Avatar: React.FC<Props> = (props: Props) => {
-  const { type, image, setImage } = props;
+  const { type, image, setImage, isPreview } = props;
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const [hover, setHover] = useState(false);
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
@@ -92,7 +94,12 @@ const Avatar: React.FC<Props> = (props: Props) => {
       <div className="flex items-center justify-center">
         {type === 'sm' && (
           <div className="w-10 h-10 rounded-full relative">
-            <Image src={image} alt="avatar" className="w-full h-full object-cover" />
+            <Image
+              src={image}
+              alt="avatar"
+              className="w-full h-full object-cover"
+              preview={isPreview ?? false}
+            />
           </div>
         )}
         {type === 'md' && (
