@@ -1,22 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../types';
-import { Button } from 'antd';
-import { logout } from '../../../store/auth/authSlice';
+import React from 'react';
+import HeaderChat from '../../components/HeaderChat/HeaderChat';
+import { ContentChat } from '../../components/ContentChat/ContentChat';
+import { AllActionSendMessage } from '../../components/AllActionSendMessage/AllActionSendMessage';
 
 const Chat = () => {
-  const dispatch = useDispatch();
-  const { currentUser } = useSelector((state: RootState) => state.auth);
-
-  console.log('currentUser', currentUser);
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
   return (
-    <div>
-      Chat
-      <Button onClick={handleLogout}>Logout</Button>
+    <div className="h-full">
+      <HeaderChat />
+      <div className="h-[calc(100%-60px)] flex flex-col">
+        <ContentChat />
+        <AllActionSendMessage />
+      </div>
     </div>
   );
 };
