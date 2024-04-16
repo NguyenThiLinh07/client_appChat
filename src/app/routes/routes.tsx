@@ -25,7 +25,7 @@ const RenderRoutes = ({
   return (
     <Suspense
       fallback={
-        <div className="spin text-center h-[calc(100%-144px)] w-[calc(100%-600px)] absolute translate-y-1/2">
+        <div className="spin text-center h-[calc(100%-120px)] w-[calc(100%-300px)] absolute translate-y-1/2">
           <Spin size="large" />
         </div>
       }
@@ -50,7 +50,7 @@ const RenderRoutes = ({
               element={
                 <LayoutRoute>
                   {route.routes ? (
-                    <RenderRoutes routes={route.routes} isAuthenticated={true} />
+                    <RenderRoutes routes={route.routes} isAuthenticated={isAuthenticated} />
                   ) : (
                     <Component history={{}} location={{}} match={{}} />
                   )}

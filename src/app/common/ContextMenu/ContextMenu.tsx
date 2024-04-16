@@ -36,7 +36,7 @@ const ContextMenu: React.FC<Props> = (props: Props) => {
 
   return (
     <div
-      className="fixed bg-[#fff] py-2 z-[100] shadow-default rounded-lg"
+      className="fixed bg-[#fff] py-2 z-[100] shadow-default rounded-default"
       style={{ top: coordinates.y, left: coordinates.x }}
       ref={contextMenuRef}
     >
@@ -48,7 +48,7 @@ const ContextMenu: React.FC<Props> = (props: Props) => {
             className="px-5 py-2 hover:bg-background-default-hover cursor-pointer w-[200px]"
             role="button"
           >
-            <span className="text-white">{name}</span>
+            <span>{name}</span>
           </li>
         ))}
       </ul>

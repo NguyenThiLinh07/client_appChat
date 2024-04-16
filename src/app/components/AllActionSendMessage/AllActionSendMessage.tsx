@@ -40,7 +40,7 @@ export const AllActionSendMessage: React.FC<Props> = (props: Props) => {
         <Input
           value={valueSend}
           onChange={handleOnchange}
-          className="border-none bg-[transparent] text-white hover:bg-[transparent] focus:bg-[transparent] focus:!shadow-none truncate"
+          className="border-none boxShadowNone bg-[transparent] text-white hover:bg-[transparent] focus:bg-[transparent] focus:!shadow-none truncate"
         />
         <VscSmiley size={26} className="my-auto text-secondary1" />
       </div>

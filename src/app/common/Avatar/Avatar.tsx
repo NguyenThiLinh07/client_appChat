@@ -10,14 +10,15 @@ import { RootState } from '../../../types';
 import './style.scss';
 
 type Props = {
-  type: 'sm' | 'md' | 'lg' | 'xl';
+  type: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   image: string;
   setImage?: React.Dispatch<React.SetStateAction<string>>;
   isPreview?: boolean;
+  className?: string;
 };
 
 const Avatar: React.FC<Props> = (props: Props) => {
-  const { type, image, setImage, isPreview } = props;
+  const { type, image, setImage, isPreview, className } = props;
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const [hover, setHover] = useState(false);
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
@@ -91,7 +92,17 @@ const Avatar: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div className={`flex items-center justify-center ${className}`}>
+        {type === 'xs' && (
+          <div className="w-6 h-6 rounded-full relative">
+            <Image
+              src={image}
+              alt="avatar"
+              className="w-full h-full object-cover"
+              preview={isPreview ?? false}
+            />
+          </div>
+        )}
         {type === 'sm' && (
           <div className="w-10 h-10 rounded-full relative">
             <Image
@@ -119,8 +130,8 @@ const Avatar: React.FC<Props> = (props: Props) => {
             onMouseLeave={() => setHover(false)}
           >
             <div
-              className={`flex absolute top-0 left-0 gap-2 z-10 rounded-full flex-col items-center justify-center w-40 h-40 bg-photopicker-overlay-background
-             ${hover ? 'visible' : 'hidden'}`}
+              className={`flex absolute top-0 left-0 gap-2 z-10 rounded-[9999px] flex-col items-center justify-center w-40 h-40 bg-photoPicker-overlay-background
+             ${hover ? 'visible' : 'hidden'} animation`}
               onClick={(e) => showContextMenu(e)}
               id="context-opener"
             >

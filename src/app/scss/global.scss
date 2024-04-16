@@ -12,3 +12,17 @@ html {
   margin: 0;
 }
 
+.animation {
+  transition: all .5s ease-in;
+
+  &:hover {
+    transition: all .5s ease-in;
+    transform: scale(1.1);
+  }
+}
+
+.boxShadowNone.ant-input-outlined {
+  &:focus {
+    box-shadow: none;
+  }
+}

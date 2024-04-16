@@ -18,12 +18,14 @@ export type AuthState = {
   loading: boolean;
   currentUser: any;
   authenticated: boolean;
+  currentChatUser: TUser;
 };
 
 export const initialState: AuthState = {
   loading: false,
   currentUser: {},
   authenticated: false,
+  currentChatUser: {},
 };
 
 export const registerUser = createAsyncThunk('auth/register', async (params: TUser, thunkAPI) => {
@@ -50,6 +52,7 @@ export const registerUser = createAsyncThunk('auth/register', async (params: TUs
     });
   } catch (error: any) {
     thunkAPI.dispatch(setShowToast({ label: error.response.data.message, type: ETypeToast.Error }));
+    thunkAPI.dispatch(setLoading(false));
   }
   thunkAPI.dispatch(setLoading(false));
 });
@@ -77,6 +80,7 @@ export const login = createAsyncThunk('auth/login', async (params: TUser, thunkA
     });
   } catch (error: any) {
     thunkAPI.dispatch(setShowToast({ label: error.response.data.message, type: ETypeToast.Error }));
+    thunkAPI.dispatch(setLoading(false));
   }
   thunkAPI.dispatch(setLoading(false));
 });
@@ -95,6 +99,7 @@ export const loginWithGoogle = createAsyncThunk(
       thunkAPI.dispatch(
         setShowToast({ label: error.response.data.message, type: ETypeToast.Error }),
       );
+      thunkAPI.dispatch(setLoading(false));
     }
     thunkAPI.dispatch(setLoading(false));
   },
@@ -122,10 +127,13 @@ const slice = createSlice({
       state.currentUser = action.payload.user;
       saveUserCookie(action.payload.user, action.payload.expires);
     },
+    setCurrentChatUser: (state, action: PayloadAction<TUser>) => {
+      state.currentChatUser = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
 
 const { actions, reducer: authReducer } = slice;
-export const { setLoading, setAuth, setCurrentUser, logout } = actions;
+export const { setLoading, setAuth, setCurrentUser, logout, setCurrentChatUser } = actions;
 export default authReducer;

@@ -6,7 +6,7 @@ export const InputCommon = ({ label, id, ...restProps }) => {
   return (
     <div>
       {label && (
-        <label htmlFor={id} className="float-start text-base font-normal pb-2">
+        <label htmlFor={id} className="float-start text-base font-normal pb-2 text-white">
           {label}
         </label>
       )}

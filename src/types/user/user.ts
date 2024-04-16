@@ -6,6 +6,9 @@ export type TUser = {
   address?: string;
   birthDay?: string;
   phoneNumber?: string;
+  message?: string;
+  name?: string;
+  online?: boolean;
 };
 
 export type TRegister = Omit<TUser, 'avatar'>;

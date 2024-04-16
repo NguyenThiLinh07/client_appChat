@@ -16,8 +16,6 @@ const Profile = () => {
 
   return (
     <Spin spinning={loading}>
-      <h1 className="text-4xl font-bold text-primary">Profile</h1>
-
       <div className="w-[800px]  mx-auto p-6 text-center rounded-[10px]">
         <Form onFinish={handleUpdateProfile} className="p-6" initialValues={{ remember: true }}>
           <div>
@@ -114,7 +112,7 @@ const Profile = () => {
             />
           </Form.Item>
 
-          <Form.Item className="btn-login">
+          <Form.Item>
             <Button type="primary" htmlType="submit">
               {t(translations.COMMON.SAVE)}
             </Button>

@@ -56,11 +56,13 @@ export function App() {
 
   const isAuthenticated = !!(authenticated && currentUser && Object.keys(currentUser).length);
 
+  console.log('isAuthenticated', isAuthenticated, checkAuthLocal);
+
   return (
     <ConfigProviderCustom
       theme={{
         token: {
-          colorPrimary: '#6318ff',
+          colorPrimary: '#9268ed',
           padding: 8,
         },
       }}
